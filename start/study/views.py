@@ -7,13 +7,15 @@ from accounts.models import StudyUser
 
 
 def group_list(request):
-    return render(request, 'study/group_list.html', {})
+    gr = Group.objects.all()
+    return render(request, 'study/group_list.html', {'group_list': gr, })
 
 def group_detail(request, id):
     group = get_object_or_404(Group, id=id)
+    members = Membership.objects.filter(group=group)
 
     return render(request, 'study/group_detail.html', {
-        'group': group,
+        'group': group, 'members': members,
     })
 
 def group_new(request):
