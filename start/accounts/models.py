@@ -27,6 +27,9 @@ class StudyUser(AbstractUser):
             ('3', '삼'),
         )
     )
+    # user = models.CharField(max_length=100)
+    # phone_number = models.CharField(max_length=20)
+    # address = models.CharField(max_length=50)
 
     objects = StudyUserManager
 

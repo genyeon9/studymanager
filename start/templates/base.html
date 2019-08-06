@@ -13,8 +13,8 @@
     {% if user.is_authenticated %}
         <div style="background-color: antiquewhite; padding:1px; margin-top: 10px">
             <p>안녕 {{ user }}! </p>
-            <a href="{% url "accounts:profile" %}"> {{ user }} </a>&nbsp; &nbsp;
-            <a href="{% url "accounts:logout" %}" onclick="return confirm('로그아웃 할거임?');">로그아웃</a>
+            <a href="{% url 'accounts:profile' %}"> {{ user }} </a>&nbsp; &nbsp;
+            <a href="{% url 'accounts:logout' %}" onclick="return confirm('로그아웃 할거임?');">로그아웃</a>
         </div>
     {% else %}
         <div>
