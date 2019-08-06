@@ -10,6 +10,7 @@ def group_list(request):
     gr = Group.objects.all()
     return render(request, 'study/group_list.html', {'group_list': gr, })
 
+
 def group_detail(request, id):
     group = get_object_or_404(Group, id=id)
     members = Membership.objects.filter(group=group)
@@ -17,6 +18,7 @@ def group_detail(request, id):
     return render(request, 'study/group_detail.html', {
         'group': group, 'members': members,
     })
+
 
 def group_new(request):
     if request.method == 'POST':
@@ -29,6 +31,7 @@ def group_new(request):
     return render(request, 'study/group_form.html', {
         'form': form,
     })
+
 
 def group_register(request):
     if request.method == 'POST':
@@ -43,4 +46,17 @@ def group_register(request):
         form = RegisterForm()
     return render(request, 'study/group_register.html', {
         'form': form,
+    })
+
+
+def group_mystudy(request):
+    return render(request, 'study/group_mystudy.html',)
+
+
+def mystudy_list(request,id):
+    user = get_object_or_404(StudyUser,id=id)
+    groups = Membership.objects.filter(person=user)
+
+    return render(request, 'study/mystudy_list.html',{
+        'user': user, 'groups': groups,
     })

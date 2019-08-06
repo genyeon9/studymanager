@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>{{ user }}님의 스터디 리스트</h1>
+
+    <ul>
+    {% for group in groups %}
+    <li>{{ group.group }}</li>
+    {% endfor %}
+
+    </ul>
+
+
+{% endblock %}
