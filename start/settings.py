@@ -37,8 +37,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+
+
     'accounts',
     'study',
+
+    #social로그인
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.kakao',
+    'allauth.socialaccount.providers.naver',
+
 ]
 
 MIDDLEWARE = [
@@ -100,6 +113,17 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+]
+
+SITE_ID = 1
+SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 
 
 # Internationalization
