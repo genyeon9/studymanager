@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.views import LoginView
 
+
 # Create your views here.
 
 def home(request):
@@ -27,10 +28,10 @@ def signup(request):
         form = SignupForm()
     return render(request, 'accounts/signup_form.html', {
         'form': form,
-             })
+    })
 
 
-def login(request):
+class Login(LoginView):
     providers = []
     for provider in get_providers():
         try:
@@ -39,33 +40,8 @@ def login(request):
             provider.social_app = None
         providers.append(provider)
 
-    # return auth_login(
-    #     request,
-    #     authentication_form=LoginForm,
-    #     template_name='accounts/login_form.html',
-    #     extra_context={'providers': providers}
-    # )
-    # a = LoginView.as_view(
-    #     request,
-    #     template_name='accounts/login_form.html',
-    #     extra_context = {'providers': providers}
-    # )
-    # return auth_login(a)
-    # return LoginView.as_view(template_name='accounts/login_form.html')(
-    #     request,
-    #     extra_context={'providers': providers}
-    # )
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('study:mystudy')
-    else:
-        form = LoginForm()
-    return render(request,'accounts/login_form.html',{
-        'providers' : providers,
-        'form' : form
-    })
+    template_name = 'accounts/login_form.html'
+    extra_context = {'providers': providers}
 
 
 @login_required
