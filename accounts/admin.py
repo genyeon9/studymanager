@@ -9,4 +9,4 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @admin.register(StudyUser)
 class StudyUserAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('id', 'username', 'nickname', 'email', 'phone_number')

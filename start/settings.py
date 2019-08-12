@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'accounts',
     'study',
+    'studypost',
 
     #social로그인
     'django.contrib.sites',

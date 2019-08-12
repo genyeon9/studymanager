@@ -1,7 +1,10 @@
 from allauth.socialaccount.models import SocialApp
 from allauth.socialaccount.templatetags.socialaccount import get_providers
 from django.shortcuts import render, redirect
-from .forms import SignupForm, LoginForm
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+
+from .forms import SignupForm, LoginForm, UserEditForm
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as auth_login
@@ -9,26 +12,10 @@ from django.contrib.auth.views import LoginView
 
 
 # Create your views here.
-
-def home(request):
-    if not request.user.is_authenticated:
-        return redirect('accounts:login')
-    else:
-        return redirect('study:mystudy')
-
-
-def signup(request):
-    if request.method == 'POST':
-        form = SignupForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            return redirect(settings.LOGIN_URL)
-
-    else:
-        form = SignupForm()
-    return render(request, 'accounts/signup_form.html', {
-        'form': form,
-    })
+class UserCreateView(CreateView):
+    template_name = 'accounts/signup_form.html'
+    form_class = SignupForm
+    success_url = reverse_lazy('accounts:login')
 
 
 class Login(LoginView):
@@ -46,6 +33,17 @@ class Login(LoginView):
 
 @login_required
 def profile(request):
-    current_user = request.user
-    profile_info = current_user.profile
-    return render(request, 'accounts/profile.html', {'profile_info': profile_info})
+    return render(request, 'accounts/profile.html')
+
+
+@login_required
+def profile_revise(request):
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            us = form.save()
+            return redirect("accounts:profile")
+    else:
+        profileform = UserEditForm(instance=request.user)
+        forms = {'profileform': profileform}
+        return render(request, 'accounts/profile_revise.html', forms)
