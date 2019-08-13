@@ -10,3 +10,4 @@ class ProfileAdmin(admin.ModelAdmin):
 @admin.register(StudyUser)
 class StudyUserAdmin(admin.ModelAdmin):
     pass
+
