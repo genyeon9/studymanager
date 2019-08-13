@@ -1,10 +1,9 @@
 from allauth.socialaccount.models import SocialApp
 from allauth.socialaccount.templatetags.socialaccount import get_providers
 from django.shortcuts import render, redirect
-from .forms import SignupForm, LoginForm
+from .forms import SignupForm
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login as auth_login
 from django.contrib.auth.views import LoginView
 
 
