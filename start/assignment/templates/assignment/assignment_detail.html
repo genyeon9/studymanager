@@ -18,7 +18,7 @@
         <p>이미 인증하셨습니다! 멋져요~>_<</p>
         {% else %}
         <a href="{% url "assignment:done_new" assignment.id %}"
-           class="btn btn-primary {% if assignment.due_date <= now %}disabled{% endif %}">인증하기</a>
+           class="btn btn-{% if assignment.due_date <= now %}secondary disabled{% else %}primary{% endif %}">인증하기</a>
         {% endif %}
     </div>
 
