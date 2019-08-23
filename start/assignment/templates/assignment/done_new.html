@@ -1,3 +1,6 @@
+{% extends 'group_base.html' %}
+
+{% block content %}
 <form action="" enctype="multipart/form-data" method="post">
     {% csrf_token %}
     {{ assignment.title }} 과제 인증
@@ -6,3 +9,5 @@
     </table>
     <input type="submit">
 </form>
+
+{% endblock %}
