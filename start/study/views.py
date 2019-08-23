@@ -282,7 +282,9 @@ def group_update(request, group_id):
         assignment.done_checked = True
         assignment.save(update_fields=['done_checked'])
         for member in members:
-            if member not in submitters:
+            if member.date_joined >= assignment.created_at:
+                continue
+            elif member not in submitters:
                 non_submit = memberships.get(person=member)
                 non_submit.noshow_assign = non_submit.noshow_assign + 1
                 non_submit.save()
