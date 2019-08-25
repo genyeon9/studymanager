@@ -4,7 +4,6 @@ from .models import Group
 class GroupForm(forms.ModelForm):
     class Meta:
         model = Group
-
         fields = ['group_name', 'group_code', 'group_bio', 'group_goal']
         labels = {
             'group_name': '',

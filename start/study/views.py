@@ -535,6 +535,7 @@ def group_register(request, id):
                     'membership_staff': membership_staff,
                     'membership_member': membership_member,
                 })
+
     else:
         form = RegisterForm()
 

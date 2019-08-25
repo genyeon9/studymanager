@@ -21,7 +21,6 @@ class Group(models.Model):
     late_penalty = models.IntegerField(default="0")
     abscence_penalty = models.IntegerField(default="0")
     notsubmit_penalty = models.IntegerField(default="0")
-
     group_member = models.ManyToManyField(StudyUser, through='Membership')
 
 
